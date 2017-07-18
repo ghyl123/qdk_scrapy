@@ -9,13 +9,13 @@
 
 ## 使用
 先在根目录下建立一个名为img的文件夹.
-如果你将自定义位置, 修改./tutorial/settings.py文件, 将其中的IMAGES_STORE修改为你将要的位置.
+如果你想自定义位置, 修改./tutorial/settings.py文件, 将其中的IMAGES_STORE修改为你想要的位置.
 
 初始链接是 http://www.aisinei.com/forum-qingdouke-1.html
 
 内容链接类似于 http://www.aisinei.com/thread-12853-1-1.html
 
-写了三个spider
+写了三个spider:
 * qdk : 下载一个内容链接
 * qdklist : 从初始链接开始, 爬去所有的内容链接
 * q : 整合前面两个, 下载所有内容链接
