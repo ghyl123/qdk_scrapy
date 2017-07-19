@@ -27,7 +27,7 @@ class RenamePipeline(object):
     def process_item(self, item, spider):
         if (spider.name == 'qdklist'):
             return item
-        elif not item['images']:
+        elif ('images' not in item) or (item['images'] is None):
             return item
 
         imgpath = settings.get('IMAGES_STORE')

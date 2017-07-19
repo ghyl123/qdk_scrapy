@@ -78,8 +78,11 @@ class QSpider(scrapy.Spider):
         item['list_urls'] = []
         for li in response.css('#moderate > div.bus_w100.bu_fl.pt20 ul li'):
             new_url = li.css('div.bus_vtem a::attr(href)').extract_first()
-            item['list_urls'].append(new_url)
-            yield response.follow(new_url, callback=self.parse_content)
+            if not new_url:
+                print('-----error: url not exist in ' + response.url)
+            else:
+                item['list_urls'].append(new_url)
+                yield response.follow(new_url, callback=self.parse_content)
         yield item
 
         # look for next link
@@ -106,15 +109,24 @@ class QSpider(scrapy.Spider):
 
         item['cover'] = response.css(
             'td.t_f ignore_js_op img::attr(zoomfile)').extract_first()
-        item['image_urls'].append(item['cover'])
-        item['id'].append('cover.jpg')
+
+        if item['cover']:
+            item['image_urls'].append(item['cover'])
+            item['id'].append('cover.jpg')
+        else:
+            # if error, return quickly
+            print('------error: cover not exist')
+            yield item
 
         secret_css = '#imagelist_' + secret_num + ' ignore_js_op'
 
         for img in response.css(secret_css):
-            item['id'].append(img.css('dl dd p.mbn a::text').extract_first())
-            item['image_urls'].append(
-                img.css('dl dd div.mbn.savephotop img::attr(zoomfile)')
-                .extract_first())
+            id = img.css('dl dd p.mbn a::text').extract_first()
+            img_url = img.css(
+                'dl dd div.mbn.savephotop img::attr(zoomfile)').extract_first()
+
+            if id and img_url:
+                item['id'].append(id)
+                item['image_urls'].append(img_url)
 
         yield item

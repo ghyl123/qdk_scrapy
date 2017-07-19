@@ -27,7 +27,17 @@ cd 到根目录, 然后执行下面三个中的任意一个:
 * scrapy crawl qdklist -o qdklist.jl
 * scrapy crawl q -o q.jl
 
+使用第一个命令的时候务必在 quotes_spider.py 中修改 start_urls 为你想要下载的内容链接.
+或者这样运行命令
+
+scrapy crawl qdk -o qdk.jl -a start_urls="example.com"
+
+example.com 修改为你想下载的内容链接.
+
 ## 日志
 默认 LOG_LEVEL = 'ERROR' 
 运行命令后无反应不要慌, 如果你想看到一连串输出, 修改为 INFO 即可.
 
+## 错误
+运行之后不能够保证一定能完整下载所有的图片, 尤其是运行scrapy crawl q -o q.jl.
+遇到这种情况, 基本只能靠scrapy crawl qdk -o qdk.jl下载特定的内容链接.
