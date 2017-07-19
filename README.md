@@ -30,7 +30,7 @@ cd 到根目录, 然后执行下面三个中的任意一个:
 使用第一个命令的时候务必在 quotes_spider.py 中修改 start_urls 为你想要下载的内容链接.
 或者这样运行命令
 
-scrapy crawl qdk -o qdk.jl -a start_urls="example.com"
+scrapy crawl qdk -o qdk.jl -a start_url="example.com"
 
 example.com 修改为你想下载的内容链接.
 
@@ -41,3 +41,7 @@ example.com 修改为你想下载的内容链接.
 ## 错误
 运行之后不能够保证一定能完整下载所有的图片, 尤其是运行scrapy crawl q -o q.jl.
 遇到这种情况, 基本只能靠scrapy crawl qdk -o qdk.jl下载特定的内容链接.
+
+## 微小的扩展性
+理论上来说也适合这个[页面](http://www.aisinei.com/forum.php?gid=1)的板块.
+青豆客只是其中之一. 简单试了下, 推女郎应该没问题.

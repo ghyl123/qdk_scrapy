@@ -8,9 +8,16 @@ import re
 
 class QDKSpider(scrapy.Spider):
     name = 'qdk'
-    start_urls = [
-        'http://www.aisinei.com/thread-12140-1-4.html',
-    ]
+
+    def __init__(self, *args, **kwargs):
+        super(QDKSpider, self).__init__(*args, **kwargs)
+
+        if (kwargs.get('start_url')):
+            self.start_urls = [kwargs.get('start_url')]
+        else:
+            self.start_urls = [
+                'http://www.aisinei.com/thread-12140-1-4.html',
+            ]
 
     def parse(self, response):
         item = QdkItem()
@@ -18,7 +25,7 @@ class QDKSpider(scrapy.Spider):
         item['image_urls'] = []
         item['id'] = []
 
-        secret_num = response.css('td.t_f::attr(id)').extract_first()[-5:]
+        secret_num = response.css('td.t_f::attr(id)').extract_first()[12:]
 
         item['cover'] = response.css(
             'td.t_f ignore_js_op img::attr(zoomfile)').extract_first()
@@ -38,9 +45,16 @@ class QDKSpider(scrapy.Spider):
 
 class QDKListSpider(scrapy.Spider):
     name = 'qdklist'
-    start_urls = [
-        'http://www.aisinei.com/forum-qingdouke-1.html',
-    ]
+
+    def __init__(self, *args, **kwargs):
+        super(QDKListSpider, self).__init__(*args, **kwargs)
+
+        if (kwargs.get('start_url')):
+            self.start_urls = [kwargs.get('start_url')]
+        else:
+            self.start_urls = [
+                'http://www.aisinei.com/forum-qingdouke-1.html',
+            ]
 
     def parse(self, response):
         item = QdkListItem()
@@ -105,7 +119,7 @@ class QSpider(scrapy.Spider):
         item['image_urls'] = []
         item['id'] = []
 
-        secret_num = response.css('td.t_f::attr(id)').extract_first()[-5:]
+        secret_num = response.css('td.t_f::attr(id)').extract_first()[12:]
 
         item['cover'] = response.css(
             'td.t_f ignore_js_op img::attr(zoomfile)').extract_first()
