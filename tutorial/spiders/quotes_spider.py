@@ -29,8 +29,14 @@ class QDKSpider(scrapy.Spider):
 
         item['cover'] = response.css(
             'td.t_f ignore_js_op img::attr(zoomfile)').extract_first()
-        item['image_urls'].append(item['cover'])
-        item['id'].append('cover.jpg')
+
+        if item['cover']:
+            item['image_urls'].append(item['cover'])
+            item['id'].append('cover.jpg')
+        else:
+            # if error, return quickly
+            print('------error: cover not exist in : ' + response.url)
+            yield item
 
         secret_css = '#imagelist_' + secret_num + ' ignore_js_op'
 
@@ -83,9 +89,15 @@ class QSpider(scrapy.Spider):
 
     name = 'q'
 
-    start_urls = [
-        'http://www.aisinei.com/forum-qingdouke-1.html',
-    ]
+    def __init__(self, *args, **kwargs):
+        super(QSpider, self).__init__(*args, **kwargs)
+
+        if (kwargs.get('start_url')):
+            self.start_urls = [kwargs.get('start_url')]
+        else:
+            self.start_urls = [
+                'http://www.aisinei.com/forum-qingdouke-1.html',
+            ]
 
     def parse(self, response):
         item = QdkListItem()
@@ -129,7 +141,7 @@ class QSpider(scrapy.Spider):
             item['id'].append('cover.jpg')
         else:
             # if error, return quickly
-            print('------error: cover not exist')
+            print('------error: cover not exist in : ' + response.url)
             yield item
 
         secret_css = '#imagelist_' + secret_num + ' ignore_js_op'

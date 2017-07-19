@@ -43,5 +43,7 @@ example.com 修改为你想下载的内容链接.
 遇到这种情况, 基本只能靠scrapy crawl qdk -o qdk.jl下载特定的内容链接.
 
 ## 微小的扩展性
-理论上来说也适合这个[页面](http://www.aisinei.com/forum.php?gid=1)的板块.
-青豆客只是其中之一. 简单试了下, 推女郎应该没问题.
+理论上来说也适合这个[页面](http://www.aisinei.com/forum.php?gid=1)上的板块.
+
+青豆客只是其中之一. 简单试了下, 推女郎应该没问题. 记得修改相应的链接.
+
