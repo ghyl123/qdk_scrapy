@@ -14,6 +14,7 @@ class QdkItem(scrapy.Item):
     # for ImagesPipeline
     image_urls = scrapy.Field()
     images = scrapy.Field()
+
     id = scrapy.Field()
     cover = scrapy.Field()
     title = scrapy.Field()
